@@ -44,17 +44,6 @@
 	color: var(--front-color);
 }
 
-.contact {
-	font-weight: 500;
-	letter-spacing: .02em;
-	color: var(--other-color);
-	transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.contact:hover,
-.contact:focus {
-	color: var(--front-color);
-}
-
 .section {
 	padding: 94px 0;
 }
@@ -160,11 +149,24 @@
 	align-items: center;
 	column-gap: 10px;
 	padding: 32px 0;
-	transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .header__link:hover .header__icon,
 .header__link:focus .header__icon {
 	fill: var(--front-color);
+}
+.header__icon {
+	transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact {
+	font-weight: 500;
+	letter-spacing: .02em;
+	color: var(--other-color);
+	transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.contact:hover,
+.contact:focus {
+	color: var(--front-color);
 }
 
 /* Footer */
@@ -351,7 +353,7 @@
 	align-items: center;
 	border: 1px solid var(--icon-color);
 	border-radius: 4px;
-	transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+	transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients__link:hover,
 .clients__link:focus {
@@ -359,6 +361,7 @@
 }
 .clients__icon {
 	fill: var(--icon-color);
+	transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients__link:hover .clients__icon,
 .clients__link:focus .clients__icon {
@@ -464,22 +467,25 @@
 
 /* Модальное окно */
 .modal {
-	display: flex;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.2);
-	transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+	transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+					visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal__box {
-	position: relative;
-	margin: auto;
-	width: 581px;
-	height: 528px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1);
+	width: 528px;
+	height: 581px;
 	border-radius: 4px;
 	background-color: var(--light-color);
+	transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal__close {
 	position: absolute;
@@ -499,5 +505,10 @@
 	border-color: var(--front-color);
 }
 .is-hidden {
-	transform: scale(0);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+.modal.is-hidden .modal__box {
+	transform: translate(-50%, -50%) scale(0.3);
 }
